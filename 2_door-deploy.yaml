@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: door
+  namespace: romain
+  labels:
+    app-off: romain
+    ver: "1"
+    env: prod
+spec:
+  selector:
+    matchLabels:
+      app-off: romain
+      ver: "1"
+      env: prod
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app-off: romain
+        ver: "1"
+        env: prod
+    spec:
+      containers:
+      - name: door
+        image: europe-west1-docker.pkg.dev/k8s-formation/formation-img/unlocker:1.6
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: OWNER_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: romain-cm
+              key: owner_name
+      

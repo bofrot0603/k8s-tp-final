@@ -1,0 +1,7 @@
+resources:
+  - 1_romain-cm.yaml
+  - 2_door-deploy.yaml
+  - 3_service.yaml
+  - 4_jobcron.yaml
+
+# kubectl apply -k ./

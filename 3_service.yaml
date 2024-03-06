@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: what-an-url
+  namespace: romain
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app-off: romain
+  type: ClusterIP
+
